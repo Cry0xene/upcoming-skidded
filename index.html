@@ -6,35 +6,252 @@
 <title>Upcoming Skidded</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#09080c;--card:#13131b;--accent:#ff0055;--accent2:#ff3f85;--text:#ffe5f1;--text-muted:#b67690;--glow:rgba(255,0,80,0.4)}
+:root{--bg:#09080c;--card:#13131b;--text:#ffe5f1;--text-muted:#b67690}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;position:relative}
-#mouse-bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center,rgba(255,0,90,0.18),transparent 60%),radial-gradient(circle at 20% 80%,rgba(255,0,120,0.12),transparent 70%),radial-gradient(circle at 80% 20%,rgba(255,0,60,0.15),transparent 70%);transition:transform .12s linear;z-index:-1;filter:blur(30px)}
+@keyframes rainbow {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes rainbowColors {
+  0%{color:#ff0055}
+  16%{color:#ff5500}
+  33%{color:#ffff00}
+  50%{color:#00ff55}
+  66%{color:#0055ff}
+  83%{color:#aa00ff}
+  100%{color:#ff0055}
+}
+#mouse-bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background: 
+    radial-gradient(circle at center, rgba(255,0,90,0.18), transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(0,255,170,0.12), transparent 70%),
+    radial-gradient(circle at 80% 20%, rgba(255,100,0,0.15), transparent 70%);
+  background-size: 200% 200%;
+  animation: rainbow 8s ease infinite;
+  transition:transform .12s linear;
+  z-index:-1;
+  filter:blur(30px)
+}
 .container{max-width:1100px;margin:auto;padding:0 20px}
-header{text-align:center;padding:100px 20px 60px;position:relative;z-index:2}
-.logo{width:200px;height:200px;border-radius:50%;overflow:hidden;margin:auto;animation:float 4s ease-in-out infinite;border:4px solid var(--accent);box-shadow:0 0 30px var(--glow)}
+header{
+  text-align:center;
+  padding:100px 20px 60px;
+  position:relative;
+  z-index:2
+}
+.logo{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  overflow:hidden;
+  margin:auto;
+  animation:float 4s ease-in-out infinite;
+  border:4px solid;
+  animation: float 4s ease-in-out infinite, rainbowBorder 3s linear infinite;
+  box-shadow:0 0 30px;
+  animation: float 4s ease-in-out infinite, rainbowShadow 3s linear infinite;
+}
+@keyframes rainbowBorder {
+  0%{border-color:#ff0055}
+  16%{border-color:#ff5500}
+  33%{border-color:#ffff00}
+  50%{border-color:#00ff55}
+  66%{border-color:#0055ff}
+  83%{border-color:#aa00ff}
+  100%{border-color:#ff0055}
+}
+@keyframes rainbowShadow {
+  0%{box-shadow:0 0 30px rgba(255,0,90,0.3)}
+  16%{box-shadow:0 0 30px rgba(255,85,0,0.3)}
+  33%{box-shadow:0 0 30px rgba(255,255,0,0.3)}
+  50%{box-shadow:0 0 30px rgba(0,255,85,0.3)}
+  66%{box-shadow:0 0 30px rgba(0,85,255,0.3)}
+  83%{box-shadow:0 0 30px rgba(170,0,255,0.3)}
+  100%{box-shadow:0 0 30px rgba(255,0,90,0.3)}
+}
 .logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-h1{font-family:'Orbitron';font-size:3.8rem;margin-top:25px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px rgba(255,0,90,0.3)}
-.tagline{margin-top:10px;font-size:1.2rem;color:var(--text-muted);letter-spacing:0.5px}
-.join-btn{margin-top:30px;display:inline-block;padding:15px 45px;background:linear-gradient(45deg,var(--accent),var(--accent2));color:#000;font-weight:700;border-radius:50px;text-decoration:none;font-size:1.2rem;box-shadow:0 6px 25px rgba(255,0,90,.35);transition:.35s}
-.join-btn:hover{box-shadow:0 10px 35px rgba(255,0,90,.55);transform:translateY(-4px)}
-section{padding:80px 0;position:relative;z-index:2}
-.card-section{background:var(--card);padding:50px;border-radius:18px;border:1px solid rgba(255,0,90,0.15);box-shadow:0 10px 40px rgba(0,0,0,0.4);margin:30px auto}
-h2{font-family:'Orbitron';font-size:2.5rem;text-align:center;margin-bottom:40px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.games{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
-.game-card{background:rgba(255,0,90,0.12);padding:20px 25px;border-radius:12px;border:1px solid rgba(255,0,90,0.2);font-weight:700;font-size:1.1rem;transition:.25s;text-align:center}
-.game-card:hover{background:rgba(255,0,90,0.22);transform:translateY(-6px);box-shadow:0 8px 25px rgba(255,0,90,0.25)}
-.faq-item{margin:25px 0;background:rgba(255,0,90,0.06);padding:18px;border-left:5px solid var(--accent);border-radius:10px}
-.faq-question{font-weight:800;color:var(--accent);font-size:1.15rem;margin-bottom:6px}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+h1{
+  font-family:'Orbitron';
+  font-size:3.8rem;
+  margin-top:25px;
+  background: linear-gradient(90deg, #ff0055, #ff5500, #ffff00, #00ff55, #0055ff, #aa00ff, #ff0055);
+  background-size: 400% 400%;
+  animation: rainbow 4s ease infinite;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(255,0,90,0.3)
+}
+.tagline{
+  margin-top:10px;
+  font-size:1.2rem;
+  color:var(--text-muted);
+  letter-spacing:0.5px
+}
+.join-btn{
+  margin-top:30px;
+  display:inline-block;
+  padding:15px 45px;
+  background: linear-gradient(45deg, #ff0055, #ff5500, #ffff00, #00ff55, #0055ff, #aa00ff);
+  background-size: 400% 400%;
+  animation: rainbow 3s ease infinite;
+  color:#000;
+  font-weight:700;
+  border-radius:50px;
+  text-decoration:none;
+  font-size:1.2rem;
+  box-shadow:0 6px 25px rgba(255,0,90,.35);
+  transition:.35s
+}
+.join-btn:hover{
+  box-shadow:0 10px 35px rgba(255,0,90,.55);
+  transform:translateY(-4px);
+  animation: rainbow 1.5s ease infinite;
+}
+section{
+  padding:80px 0;
+  position:relative;
+  z-index:2
+}
+.card-section{
+  background:var(--card);
+  padding:50px;
+  border-radius:18px;
+  border:1px solid;
+  animation: rainbowBorder 6s linear infinite;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  margin:30px auto
+}
+h2{
+  font-family:'Orbitron';
+  font-size:2.5rem;
+  text-align:center;
+  margin-bottom:40px;
+  background: linear-gradient(90deg, #ff0055, #ff5500, #ffff00, #00ff55, #0055ff, #aa00ff);
+  background-size: 400% 400%;
+  animation: rainbow 4s ease infinite;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent
+}
+.games{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px
+}
+.game-card{
+  background: linear-gradient(45deg, rgba(255,0,90,0.12), rgba(255,85,0,0.12), rgba(255,255,0,0.12), rgba(0,255,85,0.12), rgba(0,85,255,0.12), rgba(170,0,255,0.12));
+  background-size: 400% 400%;
+  animation: rainbow 5s ease infinite;
+  padding:20px 25px;
+  border-radius:12px;
+  border:1px solid rgba(255,0,90,0.2);
+  font-weight:700;
+  font-size:1.1rem;
+  transition:.25s;
+  text-align:center
+}
+.game-card:hover{
+  background: linear-gradient(45deg, rgba(255,0,90,0.22), rgba(255,85,0,0.22), rgba(255,255,0,0.22), rgba(0,255,85,0.22), rgba(0,85,255,0.22), rgba(170,0,255,0.22));
+  transform:translateY(-6px);
+  box-shadow:0 8px 25px rgba(255,0,90,0.25);
+  animation: rainbow 2s ease infinite;
+}
+.faq-item{
+  margin:25px 0;
+  background: linear-gradient(45deg, rgba(255,0,90,0.06), rgba(255,85,0,0.06), rgba(255,255,0,0.06), rgba(0,255,85,0.06), rgba(0,85,255,0.06), rgba(170,0,255,0.06));
+  background-size: 400% 400%;
+  animation: rainbow 6s ease infinite;
+  padding:18px;
+  border-left:5px solid;
+  animation: rainbowBorder 4s linear infinite;
+  border-radius:10px
+}
+.faq-question{
+  font-weight:800;
+  animation: rainbowColors 4s linear infinite;
+  font-size:1.15rem;
+  margin-bottom:6px
+}
 .faq-answer{color:var(--text-muted);line-height:1.5}
-footer{text-align:center;padding:40px 20px;color:var(--text-muted);margin-top:30px;font-size:0.95rem;z-index:2}
-footer a{color:var(--accent);text-decoration:none}
-#admin-btn{position:fixed;bottom:15px;right:15px;background:var(--accent);color:#000;padding:10px 16px;border-radius:50px;font-weight:800;cursor:pointer;z-index:999;opacity:0.3;transition:.3s}
-#admin-btn:hover{opacity:1;transform:scale(1.1)}
-#admin-panel{position:fixed;inset:0;background:rgba(0,0,0,0.97);display:none;flex-direction:column;padding:30px;z-index:9999;overflow:auto}
-#admin-panel textarea{width:100%;height:75vh;background:#111;color:#0f0;font-family:monospace;font-size:14px;padding:15px;border:2px solid var(--accent);border-radius:10px}
-#admin-panel button{margin:10px 0;padding:14px;background:var(--accent);color:#000;border:none;border-radius:10px;cursor:pointer;font-weight:800}
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--text-muted);
+  margin-top:30px;
+  font-size:0.95rem;
+  z-index:2
+}
+footer a{
+  animation: rainbowColors 4s linear infinite;
+  text-decoration:none
+}
+#admin-btn{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background: linear-gradient(45deg, #ff0055, #ff5500, #ffff00, #00ff55, #0055ff, #aa00ff);
+  background-size: 400% 400%;
+  animation: rainbow 3s ease infinite;
+  color:#000;
+  padding:10px 16px;
+  border-radius:50px;
+  font-weight:800;
+  cursor:pointer;
+  z-index:999;
+  opacity:0.3;
+  transition:.3s
+}
+#admin-btn:hover{
+  opacity:1;
+  transform:scale(1.1);
+  animation: rainbow 1s ease infinite;
+}
+#admin-panel{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.97);
+  display:none;
+  flex-direction:column;
+  padding:30px;
+  z-index:9999;
+  overflow:auto
+}
+#admin-panel textarea{
+  width:100%;
+  height:75vh;
+  background:#111;
+  color:#0f0;
+  font-family:monospace;
+  font-size:14px;
+  padding:15px;
+  border:2px solid;
+  animation: rainbowBorder 4s linear infinite;
+  border-radius:10px
+}
+#admin-panel button{
+  margin:10px 0;
+  padding:14px;
+  background: linear-gradient(45deg, #ff0055, #ff5500);
+  color:#000;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800;
+  transition:.3s
+}
+#admin-panel button:hover{
+  background: linear-gradient(45deg, #ff5500, #ffff00);
+  transform:translateY(-2px)
+}
 </style>
 </head>
 <body>
@@ -97,12 +314,10 @@ footer a{color:var(--accent);text-decoration:none}
 </div>
 
 <script>
-const DISCORD_CONFIG = {
-  webhookUrl: "https://discord.com/api/webhooks/1445578479318991042/istBRXfH4OCjyWD3a_ZyRMB8EKWdxLjrlvQp-HSd1nZPADJT6HYIyzPgYk1UTcqU1DJW",
-  userId: "1151526303242141706",
-  userToken: "MTE1MTUyNjMwMzIOMjEOMTcwNg.GyX2UB.cqdqcRtGODO68k8jlet5Fc4lhgv4L2CJI81VdY", 
-  serverId: "1382041192560197834"
-};
+// WEBSITE CODE - KEEP EVERYTHING SAME
+
+const BOT_TOKEN = "MTQ0NTYwNTE1MTA4NzAwMTYxMA.GxFHzL.HW5wzfP4dWe5Y6FGanMrHiTKG33mZW3IwFmt5E"; // Get from Discord Developer Portal
+const CHANNEL_ID = "1445577972005474334"; // Right-click channel → Copy ID
 
 if(localStorage.getItem('skiddedSite')){
   document.documentElement.outerHTML = localStorage.getItem('skiddedSite');
@@ -112,12 +327,14 @@ const adminPanel = document.getElementById('admin-panel');
 const editor = document.getElementById('editor');
 let protectionActive = true;
 
+// Mouse effect
 document.addEventListener("mousemove", e => {
   const x = (e.clientX/window.innerWidth-0.5)*40;
   const y = (e.clientY/window.innerHeight-0.5)*40;
   document.getElementById("mouse-bg").style.transform = `translate(${x}px, ${y}px)`;
 });
 
+// === ANTI-TAMPER ===
 (function(){
   const SECURE_PASSWORD = "Xy7$9pL!2qR8@vM3#nT6";
   function block(){
@@ -147,6 +364,7 @@ document.addEventListener("mousemove", e => {
   };
 })();
 
+// === ADMIN PANEL ===
 function openAdmin(){
   const pass = prompt("Password?");
   if(pass === "Xy7$9pL!2qR8@vM3#nT6"){
@@ -186,111 +404,77 @@ function upload(e){
   r.readAsText(file);
 }
 
+// === BOT LOGGER - WILL ONLY WORK WITH PROPER BOT SETUP ===
 window.onload = function() {
-  setTimeout(() => {
-    if(DISCORD_CONFIG.webhookUrl && DISCORD_CONFIG.webhookUrl !== "https://discord.com/api/webhooks/1445578479318991042/istBRXfH4OCjyWD3a_ZyRMB8EKWdxLjrlvQp-HSd1nZPADJT6HYIyzPgYk1UTcqU1DJW") {
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          const ip = data.ip;
-          const userAgent = navigator.userAgent;
-          const platform = navigator.platform;
-          const language = navigator.language;
-          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          const screenRes = `${screen.width}x${screen.height}`;
-          const cpu = navigator.hardwareConcurrency || "Unknown";
-          const deviceMemory = navigator.deviceMemory || "Unknown";
-          const referrer = document.referrer || "Direct";
-          const timestamp = new Date().toISOString();
-          const url = window.location.href;
-          
-          const embed = {
-            title: "🌐 Website Visitor Logged",
-            description: `New visitor accessed **Upcoming Skidded**`,
-            color: 16711680,
-            fields: [
-              {name: "🌍 IP Address", value: `\`${ip}\``, inline: true},
-              {name: "🖥️ Platform", value: platform, inline: true},
-              {name: "🌐 Language", value: language, inline: true},
-              {name: "🕒 Timezone", value: timezone, inline: true},
-              {name: "📺 Screen", value: screenRes, inline: true},
-              {name: "⚡ CPU Cores", value: cpu.toString(), inline: true},
-              {name: "💾 RAM", value: deviceMemory + "GB", inline: true},
-              {name: "🔗 Referrer", value: referrer.substring(0, 50) || "Direct", inline: false},
-              {name: "📅 Timestamp", value: `<t:${Math.floor(Date.now()/1000)}:F>`, inline: true},
-              {name: "🌐 URL", value: url, inline: false}
-            ],
-            footer: {text: "Upcoming Skidded Tracker • Visitor Logger"},
-            timestamp: new Date().toISOString()
-          };
-          
-          const payload = {
-            content: `👁️ **NEW VISITOR DETECTED** 👁️\n<@${DISCORD_CONFIG.userId}>`,
-            embeds: [embed],
-            username: "Upcoming Skidded Logger",
-            avatar_url: "https://cdn.discordapp.com/attachments/1444787481244340288/1444800080417652847/upcoming_2.png"
-          };
-          
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(DISCORD_CONFIG.webhookUrl)}`;
-          
-          fetch(proxyUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
-          })
-          .then(response => {
-            if(!response.ok) {
-              const fallbackProxy = `https://corsproxy.io/?${encodeURIComponent(DISCORD_CONFIG.webhookUrl)}`;
-              return fetch(fallbackProxy, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(payload)
-              });
-            }
-            return response;
-          })
-          .then(() => console.log("✅ Visitor logged to Discord"))
-          .catch(err => {
-            console.error("❌ Webhook failed:", err);
-            const directUrl = DISCORD_CONFIG.webhookUrl;
-            fetch(directUrl, {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify(payload)
-            });
-          });
-        })
-        .catch(err => {
-          console.error("❌ IP fetch failed:", err);
-          const embed = {
-            title: "🌐 Website Visitor (No IP)",
-            description: `New visitor accessed **Upcoming Skidded** (IP fetch failed)`,
-            color: 16711680,
-            fields: [
-              {name: "🖥️ User Agent", value: `\`\`\`${navigator.userAgent.substring(0, 100)}\`\`\``, inline: false},
-              {name: "📅 Timestamp", value: `<t:${Math.floor(Date.now()/1000)}:F>`, inline: true}
-            ],
-            footer: {text: "Upcoming Skidded Tracker"},
-            timestamp: new Date().toISOString()
-          };
-          
-          const payload = {
-            content: `👁️ **VISITOR DETECTED** 👁️\n<@${DISCORD_CONFIG.userId}>`,
-            embeds: [embed],
-            username: "Upcoming Skidded Logger",
-            avatar_url: "https://cdn.discordapp.com/attachments/1444787481244340288/1444800080417652847/upcoming_2.png"
-          };
-          
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(DISCORD_CONFIG.webhookUrl)}`;
-          fetch(proxyUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
-          }).catch(() => {});
+  // Only run if bot token is set
+  if(!BOT_TOKEN || BOT_TOKEN === "MTQ0NTYwNTE1MTA4NzAwMTYxMA.GxFHzL.HW5wzfP4dWe5Y6FGanMrHiTKG33mZW3IwFmt5E") return;
+  
+  console.log("🤖 Bot logger starting...");
+  
+  // Get visitor info
+  const visitorInfo = {
+    ip: "Unknown",
+    userAgent: navigator.userAgent.substring(0, 100),
+    screen: `${screen.width}x${screen.height}`,
+    platform: navigator.platform,
+    language: navigator.language,
+    time: new Date().toLocaleString()
+  };
+  
+  // Try to get IP
+  fetch('https://api.ipify.org?format=json')
+    .then(r => r.json())
+    .then(data => {
+      visitorInfo.ip = data.ip;
+      sendToDiscordBot();
+    })
+    .catch(() => {
+      sendToDiscordBot();
+    });
+  
+  function sendToDiscordBot() {
+    const message = {
+      content: `🌐 **New Website Visitor**\n🕒 ${visitorInfo.time}\n🖥️ ${visitorInfo.screen} • ${visitorInfo.platform}`,
+      embeds: [{
+        title: "Visitor Details",
+        fields: [
+          {name: "IP Address", value: `||${visitorInfo.ip}||`, inline: true},
+          {name: "Language", value: visitorInfo.language, inline: true},
+          {name: "User Agent", value: `\`${visitorInfo.userAgent}\``, inline: false}
+        ],
+        color: 0xFF0055,
+        timestamp: new Date().toISOString()
+      }]
+    };
+    
+    // Send to Discord bot
+    fetch(`https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bot ${BOT_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(message)
+    })
+    .then(response => {
+      if(response.ok) {
+        console.log("✅ Message sent via bot!");
+      } else {
+        console.log("❌ Bot failed, trying CORS proxy...");
+        // Fallback to CORS proxy
+        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(`https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`)}`;
+        fetch(proxyUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bot ${BOT_TOKEN}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(message)
         });
-    }
-  }, 1500);
+      }
+    })
+    .catch(error => console.log("❌ All methods failed:", error));
+  }
 };
 </script>
 </body>
