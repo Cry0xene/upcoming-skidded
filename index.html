@@ -6,186 +6,163 @@
 <title>Upcoming Skidded</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#09080c;--card:#13131b;--text:#ffe5f1;--text-muted:#b67690}
+:root{--bg:#09080c;--card:#13131b;--accent:#ff0055;--accent2:#ff3f85;--text:#ffe5f1;--text-muted:#b67690;--glow:rgba(255,0,80,0.4)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;position:relative}
-@keyframes rainbow {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
 #mouse-bg{
   position:fixed;
   inset:0;
   pointer-events:none;
-  background: 
-    radial-gradient(circle at center, rgba(255,0,90,0.18), transparent 60%),
-    radial-gradient(circle at 20% 80%, rgba(0,255,200,0.12), transparent 70%),
-    radial-gradient(circle at 80% 20%, rgba(255,100,0,0.15), transparent 70%);
-  background-size: 200% 200%;
-  animation: rainbow 8s ease infinite;
-  transition:transform .12s linear;
   z-index:-1;
   filter:blur(30px)
 }
 .container{max-width:1100px;margin:auto;padding:0 20px}
-header{
-  text-align:center;
-  padding:100px 20px 60px;
-  position:relative;
-  z-index:2;
-  background: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff, #ff0055);
-  background-size: 400% 400%;
-  animation: rainbow 6s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.logo{
-  width:200px;
-  height:200px;
-  border-radius:50%;
-  overflow:hidden;
-  margin:auto;
-  animation:float 4s ease-in-out infinite;
-  border:4px solid;
-  border-image: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff) 1;
-  box-shadow:0 0 30px rgba(255,0,90,0.3);
-  background: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff);
-  background-size: 400% 400%;
-  animation: float 4s ease-in-out infinite, rainbow 4s ease infinite;
-}
+header{text-align:center;padding:100px 20px 60px;position:relative;z-index:2}
+.logo{width:200px;height:200px;border-radius:50%;overflow:hidden;margin:auto;animation:float 4s ease-in-out infinite}
 .logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes rainbowCycle {
+  0%{border-color:#ff0055;box-shadow:0 0 30px rgba(255,0,90,0.3)}
+  25%{border-color:#00ffaa;box-shadow:0 0 30px rgba(0,255,170,0.3)}
+  50%{border-color:#0055ff;box-shadow:0 0 30px rgba(0,85,255,0.3)}
+  75%{border-color:#ffaa00;box-shadow:0 0 30px rgba(255,170,0,0.3)}
+  100%{border-color:#ff0055;box-shadow:0 0 30px rgba(255,0,90,0.3)}
 }
+.logo{border:4px solid #ff0055;animation:float 4s ease-in-out infinite, rainbowCycle 4s linear infinite}
 h1{
   font-family:'Orbitron';
   font-size:3.8rem;
   margin-top:25px;
-  background: linear-gradient(90deg, #ff0055, #00ffaa, #0055ff, #ff0055);
-  background-size: 300% 300%;
-  animation: rainbow 4s ease infinite;
+  background:linear-gradient(90deg,#ff0055,#00ffaa,#0055ff,#ff0055);
+  background-size:300% 300%;
+  animation:rainbowText 4s linear infinite;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   text-shadow:0 0 20px rgba(255,0,90,0.3)
 }
-.tagline{
-  margin-top:10px;
-  font-size:1.2rem;
-  color:var(--text-muted);
-  letter-spacing:0.5px
+@keyframes rainbowText {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
+.tagline{margin-top:10px;font-size:1.2rem;color:var(--text-muted);letter-spacing:0.5px}
 .join-btn{
   margin-top:30px;
   display:inline-block;
   padding:15px 45px;
-  background: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff);
-  background-size: 300% 300%;
-  animation: rainbow 3s ease infinite;
+  background:linear-gradient(45deg,#ff0055,#00ffaa,#0055ff);
+  background-size:300% 300%;
+  animation:rainbowButton 3s linear infinite;
   color:#000;
   font-weight:700;
   border-radius:50px;
   text-decoration:none;
   font-size:1.2rem;
-  box-shadow:0 6px 25px rgba(255,0,90,.35);
-  transition:.35s
+  transition:.35s;
+  border:none;
+  cursor:pointer
+}
+@keyframes rainbowButton {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 .join-btn:hover{
-  box-shadow:0 10px 35px rgba(255,0,90,.55);
   transform:translateY(-4px);
-  animation: rainbow 1.5s ease infinite;
+  box-shadow:0 10px 35px rgba(255,0,90,.55)
 }
-section{
-  padding:80px 0;
-  position:relative;
-  z-index:2
-}
+section{padding:80px 0;position:relative;z-index:2}
 .card-section{
   background:var(--card);
   padding:50px;
   border-radius:18px;
-  border:1px solid;
-  border-image: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff) 1;
+  border:1px solid rgba(255,0,90,0.15);
   box-shadow:0 10px 40px rgba(0,0,0,0.4);
-  margin:30px auto
+  margin:30px auto;
+  animation:rainbowBorder 6s linear infinite;
+  border:1px solid #ff0055
+}
+@keyframes rainbowBorder {
+  0%{border-color:#ff0055;box-shadow:0 10px 40px rgba(255,0,90,0.4)}
+  25%{border-color:#00ffaa;box-shadow:0 10px 40px rgba(0,255,170,0.4)}
+  50%{border-color:#0055ff;box-shadow:0 10px 40px rgba(0,85,255,0.4)}
+  75%{border-color:#ffaa00;box-shadow:0 10px 40px rgba(255,170,0,0.4)}
+  100%{border-color:#ff0055;box-shadow:0 10px 40px rgba(255,0,90,0.4)}
 }
 h2{
   font-family:'Orbitron';
   font-size:2.5rem;
   text-align:center;
   margin-bottom:40px;
-  background: linear-gradient(90deg, #ff0055, #00ffaa, #0055ff);
-  background-size: 300% 300%;
-  animation: rainbow 4s ease infinite;
+  background:linear-gradient(90deg,#ff0055,#00ffaa,#0055ff);
+  background-size:300% 300%;
+  animation:rainbowText 4s linear infinite;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent
 }
-.games{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:20px
-}
+.games{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
 .game-card{
-  background: linear-gradient(45deg, rgba(255,0,90,0.12), rgba(0,255,170,0.12), rgba(0,85,255,0.12));
-  background-size: 300% 300%;
-  animation: rainbow 5s ease infinite;
+  background:rgba(255,0,90,0.12);
   padding:20px 25px;
   border-radius:12px;
   border:1px solid rgba(255,0,90,0.2);
   font-weight:700;
   font-size:1.1rem;
   transition:.25s;
-  text-align:center
+  text-align:center;
+  animation:rainbowGameCard 8s linear infinite
+}
+@keyframes rainbowGameCard {
+  0%{border-color:rgba(255,0,90,0.2);background:rgba(255,0,90,0.12)}
+  25%{border-color:rgba(0,255,170,0.2);background:rgba(0,255,170,0.12)}
+  50%{border-color:rgba(0,85,255,0.2);background:rgba(0,85,255,0.12)}
+  75%{border-color:rgba(255,170,0,0.2);background:rgba(255,170,0,0.12)}
+  100%{border-color:rgba(255,0,90,0.2);background:rgba(255,0,90,0.12)}
 }
 .game-card:hover{
-  background: linear-gradient(45deg, rgba(255,0,90,0.22), rgba(0,255,170,0.22), rgba(0,85,255,0.22));
   transform:translateY(-6px);
-  box-shadow:0 8px 25px rgba(255,0,90,0.25);
-  animation: rainbow 2s ease infinite;
+  box-shadow:0 8px 25px rgba(255,0,90,0.25)
 }
 .faq-item{
   margin:25px 0;
-  background: linear-gradient(45deg, rgba(255,0,90,0.06), rgba(0,255,170,0.06), rgba(0,85,255,0.06));
-  background-size: 300% 300%;
-  animation: rainbow 6s ease infinite;
+  background:rgba(255,0,90,0.06);
   padding:18px;
-  border-left:5px solid;
-  border-image: linear-gradient(to bottom, #ff0055, #00ffaa, #0055ff) 1;
-  border-radius:10px
+  border-left:5px solid var(--accent);
+  border-radius:10px;
+  animation:rainbowFaq 10s linear infinite
+}
+@keyframes rainbowFaq {
+  0%{border-left-color:#ff0055;background:rgba(255,0,90,0.06)}
+  25%{border-left-color:#00ffaa;background:rgba(0,255,170,0.06)}
+  50%{border-left-color:#0055ff;background:rgba(0,85,255,0.06)}
+  75%{border-left-color:#ffaa00;background:rgba(255,170,0,0.06)}
+  100%{border-left-color:#ff0055;background:rgba(255,0,90,0.06)}
 }
 .faq-question{
   font-weight:800;
-  background: linear-gradient(90deg, #ff0055, #00ffaa);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:var(--accent);
   font-size:1.15rem;
-  margin-bottom:6px
+  margin-bottom:6px;
+  animation:rainbowText 4s linear infinite;
+  background:linear-gradient(90deg,#ff0055,#00ffaa);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent
 }
 .faq-answer{color:var(--text-muted);line-height:1.5}
-footer{
-  text-align:center;
-  padding:40px 20px;
-  color:var(--text-muted);
-  margin-top:30px;
-  font-size:0.95rem;
-  z-index:2
-}
+footer{text-align:center;padding:40px 20px;color:var(--text-muted);margin-top:30px;font-size:0.95rem;z-index:2}
 footer a{
-  background: linear-gradient(90deg, #ff0055, #00ffaa);
+  color:var(--accent);
+  text-decoration:none;
+  animation:rainbowText 4s linear infinite;
+  background:linear-gradient(90deg,#ff0055,#00ffaa);
   -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-decoration:none
+  -webkit-text-fill-color:transparent
 }
 #admin-btn{
   position:fixed;
   bottom:15px;
   right:15px;
-  background: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff);
-  background-size: 300% 300%;
-  animation: rainbow 3s ease infinite;
+  background:var(--accent);
   color:#000;
   padding:10px 16px;
   border-radius:50px;
@@ -193,12 +170,15 @@ footer a{
   cursor:pointer;
   z-index:999;
   opacity:0.3;
-  transition:.3s
+  transition:.3s;
+  animation:rainbowButton 3s linear infinite;
+  background:linear-gradient(45deg,#ff0055,#00ffaa,#0055ff);
+  background-size:300% 300%;
+  border:none
 }
 #admin-btn:hover{
   opacity:1;
-  transform:scale(1.1);
-  animation: rainbow 1s ease infinite;
+  transform:scale(1.1)
 }
 #admin-panel{
   position:fixed;
@@ -218,23 +198,25 @@ footer a{
   font-family:monospace;
   font-size:14px;
   padding:15px;
-  border:2px solid;
-  border-image: linear-gradient(45deg, #ff0055, #00ffaa, #0055ff) 1;
-  border-radius:10px
+  border:2px solid var(--accent);
+  border-radius:10px;
+  animation:rainbowBorder 4s linear infinite;
+  border:2px solid #ff0055
 }
 #admin-panel button{
   margin:10px 0;
   padding:14px;
-  background: linear-gradient(45deg, #ff0055, #00ffaa);
+  background:var(--accent);
   color:#000;
   border:none;
   border-radius:10px;
   cursor:pointer;
   font-weight:800;
-  transition:.3s
+  animation:rainbowButton 3s linear infinite;
+  background:linear-gradient(45deg,#ff0055,#00ffaa,#0055ff);
+  background-size:300% 300%
 }
 #admin-panel button:hover{
-  background: linear-gradient(45deg, #00ffaa, #0055ff);
   transform:translateY(-2px)
 }
 </style>
@@ -288,7 +270,7 @@ footer a{
 <div id="admin-btn" onclick="openAdmin()">⚡</div>
 
 <div id="admin-panel">
-  <h2 style="background: linear-gradient(90deg, #ff0055, #00ffaa, #0055ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Admin Panel — Cry0xene Only</h2>
+  <h2 style="color:var(--accent)">Admin Panel — Cry0xene Only</h2>
   <textarea id="editor"></textarea>
   <button onclick="save()">SAVE & UPDATE LIVE</button>
   <button onclick="download()">DOWNLOAD HTML</button>
@@ -313,264 +295,17 @@ document.addEventListener("mousemove", e => {
   const x = (e.clientX/window.innerWidth-0.5)*40;
   const y = (e.clientY/window.innerHeight-0.5)*40;
   document.getElementById("mouse-bg").style.transform = `translate(${x}px, ${y}px)`;
+  
+  const hue = (e.clientX / window.innerWidth) * 360;
+  const bg = document.getElementById('mouse-bg');
+  bg.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, 
+    hsla(${hue}, 100%, 50%, 0.18), transparent 60%),
+    radial-gradient(circle at 20% 80%, hsla(${(hue + 120) % 360}, 100%, 50%, 0.12), transparent 70%),
+    radial-gradient(circle at 80% 20%, hsla(${(hue + 240) % 360}, 100%, 50%, 0.15), transparent 70%)`;
 });
 
 (function(){
   const SECURE_PASSWORD = "Xy7$9pL!2qR8@vM3#nT6";
-  function block(){
-    if(!protectionActive) return;
-    document.body.innerHTML = `
-      <div style="
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        height:100vh;
-        background:#000;
-        font-size:2rem;
-        font-family:monospace;
-        text-align:center;
-        padding:20px;
-        background: linear-gradient(45deg, #000, #111);
-      ">
-        <div>
-          <div style="
-            background: linear-gradient(90deg, #ff0055, #00ffaa, #0055ff, #ff0055);
-            background-size: 300% 300%;
-            animation: rainbow 2s ease infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3rem;
-            margin-bottom: 20px;
-          ">⚠️ ACCESS DENIED ⚠️</div>
-          Anti-Skid Protection Triggered<br>
-          Reloading in 3 seconds...
-        </div>
-      </div>`;
-    setTimeout(() => location.reload(), 3000);
-  }
-  let devOpen = false;
-  function checkDevTools(){
-    if(!protectionActive) return;
-    const threshold = 160;
-    if((window.outerWidth - window.innerWidth > threshold) || (window.outerHeight - window.innerHeight > threshold)){
-      if(!devOpen){ devOpen = true; block(); }
-    } else devOpen = false;
-  }
-  const debuggerCheck = () => {
-    if(protectionActive) {
-      try {
-        (function(){})["constructor"]("debugger")();
-      } catch(e) {
-        block();
-      }
-    }
-  };
-  setInterval(checkDevTools, 200);
-  setInterval(debuggerCheck, 500);
-  document.oncontextmenu = e => { 
-    if(protectionActive){ 
-      e.preventDefault(); 
-      block(); 
-    }
-  };
-  document.onkeydown = e => {
-    if(!protectionActive) return;
-    if(e.key === 'F12' || 
-       (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || 
-       (e.ctrlKey && e.key === 'u') ||
-       (e.ctrlKey && e.key === 's') ||
-       (e.ctrlKey && e.shiftKey && e.key === 'S')) {
-      e.preventDefault();
-      block();
-    }
-  };
-  if(window.top !== window.self) {
-    block();
-  }
-})();
-
-function openAdmin(){
-  const pass = prompt("Enter Admin Password:");
-  const SECURE_PASSWORD = "Xy7$9pL!2qR8@vM3#nT6";
-  if(pass === SECURE_PASSWORD){
-    protectionActive = false;
-    adminPanel.style.display = 'flex';
-    editor.value = document.documentElement.outerHTML;
-    setTimeout(() => pass = null, 100);
-  } else if(pass !== null){
-    alert("❌ Incorrect password. Access denied.");
-  }
-}
-
-function closeAdmin(){
-  adminPanel.style.display = 'none';
-  protectionActive = true;
-  editor.value = '';
-}
-
-function save(){
-  try {
-    localStorage.setItem('skiddedSite', editor.value);
-    alert("✅ Changes saved successfully!\nPage will refresh to apply changes.");
-    setTimeout(() => location.reload(), 1000);
-  } catch(e) {
-    alert("❌ Error saving changes: " + e.message);
-  }
-}
-
-function download(){
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([editor.value], {type:'text/html'}));
-  a.download = 'upcoming_skidded_backup.html';
-  a.click();
-  alert("💾 Backup downloaded!");
-}
-
-function upload(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  if(!file.name.endsWith('.html') && !file.name.endsWith('.htm')) {
-    alert("❌ Please upload an HTML file only!");
-    return;
-  }
-  const r = new FileReader();
-  r.onload = ev => {
-    editor.value = ev.target.result;
-    if(confirm("⚠️ Replace current website with uploaded file?\nThis will overwrite all existing content.")) {
-      save();
-    }
-  };
-  r.readAsText(file);
-}
-
-window.onload = function() {
-  if(WEBHOOK_URL && WEBHOOK_URL.trim() !== "" && WEBHOOK_URL !== "https://discord.com/api/webhooks/1445578479318991042/istBRXfH4OCjyWD3a_ZyRMB8EKWdxLjrlvQp-HSd1nZPADJT6HYIyzPgYk1UTcqU1DJW") {
-    setTimeout(() => {
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          const ip = data.ip;
-          const userAgent = navigator.userAgent;
-          const platform = navigator.platform;
-          const language = navigator.language;
-          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          const screenRes = `${screen.width}x${screen.height}`;
-          const cpu = navigator.hardwareConcurrency || "Unknown";
-          const deviceMemory = navigator.deviceMemory || "Unknown";
-          const referrer = document.referrer || "Direct";
-          const timestamp = new Date().toISOString();
-          
-          const embed = {
-            title: "🌐 Website Visitor Logged",
-            description: "New visitor accessed the site",
-            color: 16711680,
-            fields: [
-              {name: "IP Address", value: ip, inline: false},
-              {name: "User Agent", value: userAgent.substring(0, 100) + (userAgent.length > 100 ? "..." : ""), inline: false},
-              {name: "Platform", value: platform, inline: true},
-              {name: "Language", value: language, inline: true},
-              {name: "Timezone", value: timezone, inline: true},
-              {name: "Screen", value: screenRes, inline: true},
-              {name: "CPU Cores", value: cpu.toString(), inline: true},
-              {name: "Device Memory", value: deviceMemory + "GB", inline: true},
-              {name: "Referrer", value: referrer.substring(0, 50), inline: false},
-              {name: "Timestamp", value: timestamp, inline: false}
-            ],
-            footer: {text: "Upcoming Skidded Tracker"}
-          };
-          
-          fetch('https://corsproxy.io/?' + encodeURIComponent(WEBHOOK_URL), {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({embeds: [embed]})
-          }).catch(() => {});
-        })
-        .catch(() => {});
-    }, 1000);
-  }
-};
-</script>
-</body>
-</html>#admin-panel button{margin:10px 0;padding:14px;background:var(--accent);color:#000;border:none;border-radius:10px;cursor:pointer;font-weight:800}
-</style>
-</head>
-<body>
-
-<div id="mouse-bg"></div>
-
-<div id="main-site">
-<header>
-  <div class="container">
-    <div class="logo">
-      <img src="https://cdn.discordapp.com/attachments/1444787481244340288/1444800080417652847/upcoming_2.png?ex=6930a96e&is=692f57ee&hm=a218cfe015eb55be0b39e642c11ac7fcdeb5870b0396f500b19c13295ae26a4c&" alt="Upcoming Skidded">
-    </div>
-    <h1>Upcoming Skidded</h1>
-    <p class="tagline">New server, fresh drops every day — no VIP</p>
-    <a href="https://discord.gg/EDR4bU82t8" class="join-btn" target="_blank">JOIN DISCORD</a>
-  </div>
-</header>
-
-<section class="card-section">
-  <div class="container">
-    <h2>We Got</h2>
-    <div class="games">
-      <div class="game-card">Rec Room</div>
-      <div class="game-card">Fortnite</div>
-      <div class="game-card">Roblox</div>
-      <div class="game-card">CS2</div>
-      <div class="game-card">Warzone</div>
-    </div>
-  </div>
-</section>
-
-<section class="card-section">
-  <div class="container">
-    <h2>FAQ</h2>
-    <div class="faq-item"><div class="faq-question">This server legit?</div><div class="faq-answer">Yes, everything scanned before we drop it, no malware.</div></div>
-    <div class="faq-item"><div class="faq-question">Got VIP or paid stuff?</div><div class="faq-answer">Everything free forever, no hidden roles.</div></div>
-    <div class="faq-item"><div class="faq-question">All games live?</div><div class="faq-answer">All 5 already dropping, more coming.</div></div>
-    <div class="faq-item"><div class="faq-question">Will I get banned?</div><div class="faq-answer">Use alts or play smart, we just drop the tools.</div></div>
-  </div>
-</section>
-
-<footer>
-  <p>2025 Upcoming Skidded — everything free</p>
-  <p><a href="https://discord.gg/EDR4bU82t8">discord.gg/EDR4bU82t8</a></p>
-</footer>
-</div>
-
-<div id="admin-btn" onclick="openAdmin()">⚡</div>
-
-<div id="admin-panel">
-  <h2 style="color:var(--accent)">Admin Panel — Cry0xene Only</h2>
-  <textarea id="editor"></textarea>
-  <button onclick="save()">SAVE & UPDATE LIVE</button>
-  <button onclick="download()">DOWNLOAD HTML</button>
-  <button onclick="document.getElementById('file').click()">UPLOAD NEW HTML</button>
-  <input type="file" id="file" style="display:none" onchange="upload(event)">
-  <button onclick="closeAdmin()" style="background:#333">Close Panel</button>
-  <p style="color:#0f0;margin-top:15px">Protection OFF while panel open<br>Password: <strong>NiggerLink1997</strong></p>
-</div>
-
-<script>
-// Load saved version if exists
-if(localStorage.getItem('skiddedSite')){
-  document.documentElement.outerHTML = localStorage.getItem('skiddedSite');
-}
-
-const adminPanel = document.getElementById('admin-panel');
-const editor = document.getElementById('editor');
-let protectionActive = true;
-
-// Mouse effect
-document.addEventListener("mousemove", e => {
-  const x = (e.clientX/window.innerWidth-0.5)*40;
-  const y = (e.clientY/window.innerHeight-0.5)*40;
-  document.getElementById("mouse-bg").style.transform = `translate(\( {x}px, \){y}px)`;
-});
-
-// === CLEAN ANTI-TAMPER (your preferred version) ===
-(function(){
   function block(){
     if(!protectionActive) return;
     document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#f00;font-size:2rem;">Access Denied! Reloading...</div>';
@@ -598,10 +333,9 @@ document.addEventListener("mousemove", e => {
   };
 })();
 
-// === ADMIN PANEL ===
 function openAdmin(){
   const pass = prompt("Password?");
-  if(pass === "NiggerLink1997"){
+  if(pass === "Xy7$9pL!2qR8@vM3#nT6"){
     protectionActive = false;
     adminPanel.style.display = 'flex';
     editor.value = document.documentElement.outerHTML;
@@ -637,6 +371,64 @@ function upload(e){
   };
   r.readAsText(file);
 }
+
+window.onload = function() {
+  if(WEBHOOK_URL && WEBHOOK_URL.trim() !== "" && WEBHOOK_URL !== "https://discord.com/api/webhooks/1445578479318991042/istBRXfH4OCjyWD3a_ZyRMB8EKWdxLjrlvQp-HSd1nZPADJT6HYIyzPgYk1UTcqU1DJW") {
+    setTimeout(() => {
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          const ip = data.ip;
+          const userAgent = navigator.userAgent;
+          const platform = navigator.platform;
+          const language = navigator.language;
+          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          const screenRes = `${screen.width}x${screen.height}`;
+          const cpu = navigator.hardwareConcurrency || "Unknown";
+          const deviceMemory = navigator.deviceMemory || "Unknown";
+          const referrer = document.referrer || "Direct";
+          const timestamp = new Date().toISOString();
+          
+          const embed = {
+            title: "🌐 Website Visitor Logged",
+            description: "New visitor accessed Upcoming Skidded",
+            color: 16711680,
+            fields: [
+              {name: "IP Address", value: `\`${ip}\``, inline: true},
+              {name: "Platform", value: platform, inline: true},
+              {name: "Language", value: language, inline: true},
+              {name: "Screen", value: screenRes, inline: true},
+              {name: "User Agent", value: `\`\`\`${userAgent.substring(0, 100)}\`\`\``, inline: false},
+              {name: "Referrer", value: referrer.substring(0, 50) || "Direct", inline: true},
+              {name: "Timestamp", value: `<t:${Math.floor(Date.now()/1000)}:R>`, inline: true}
+            ],
+            footer: {text: "Upcoming Skidded Tracker"},
+            timestamp: new Date().toISOString()
+          };
+          
+          const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(WEBHOOK_URL)}`;
+          
+          fetch(proxyUrl, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              content: "🚨 **New Website Visitor** 🚨",
+              embeds: [embed],
+              username: "Upcoming Skidded Logger",
+              avatar_url: "https://cdn.discordapp.com/attachments/1444787481244340288/1444800080417652847/upcoming_2.png"
+            })
+          }).then(() => {
+            console.log("Webhook sent successfully");
+          }).catch(error => {
+            console.error("Webhook failed:", error);
+          });
+        })
+        .catch(error => {
+          console.error("IP fetch failed:", error);
+        });
+    }, 2000);
+  }
+};
 </script>
 </body>
 </html>
