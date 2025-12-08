@@ -462,7 +462,7 @@ window.onload = function() {
       timestamp: new Date().toISOString()
     };
 
-    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', {
+    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -492,7 +492,7 @@ window.onload = function() {
       sessionId: visitorInfo.sessionId
     };
 
-    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', {
+    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -514,7 +514,7 @@ window.onload = function() {
 
     if(Math.abs(scrollData.scrollY - lastScroll) > 100) {
       lastScroll = scrollData.scrollY;
-      fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', {
+      fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -533,7 +533,7 @@ window.onload = function() {
       sessionId: visitorInfo.sessionId
     };
 
-    navigator.sendBeacon('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', JSON.stringify(unloadData));
+    navigator.sendBeacon('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', JSON.stringify(unloadData));
   });
 };
 </script>
