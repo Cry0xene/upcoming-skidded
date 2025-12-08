@@ -492,7 +492,7 @@ window.onload = function() {
       sessionId: visitorInfo.sessionId
     };
 
-    fetch('http://localhost:5000/send-to-discord', {
+    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -514,7 +514,7 @@ window.onload = function() {
 
     if(Math.abs(scrollData.scrollY - lastScroll) > 100) {
       lastScroll = scrollData.scrollY;
-      fetch('http://localhost:5000/send-to-discord', {
+      fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -533,7 +533,7 @@ window.onload = function() {
       sessionId: visitorInfo.sessionId
     };
 
-    navigator.sendBeacon('http://localhost:5000/send-to-discord', JSON.stringify(unloadData));
+    navigator.sendBeacon('https://threatless-emotionable-joey.ngrok-free.dev/send-to-discord', JSON.stringify(unloadData));
   });
 };
 </script>
