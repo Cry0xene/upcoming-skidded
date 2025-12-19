@@ -1,541 +1,967 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upcoming Skidded</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#09080c;--card:#13131b;--text:#ffe5f1;--text-muted:#b67690}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;position:relative}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/ Upcoming Skid \ | Cheat Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --skid-red: #ff4757;
+            --skid-purple: #8a2be2;
+            --skid-blue: #00bfff;
+            --skid-green: #32cd32;
+            --skid-orange: #ff8c00;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --card-bg: rgba(20, 20, 30, 0.9);
+            --rainbow-angle: 0deg;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0c0;
+        }
 
-@keyframes smoothRainbow {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+        @property --rainbow-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
 
-@keyframes smoothRainbowColors {
-  0%{color:#ff0055}
-  14%{color:#ff2a00}
-  28%{color:#ff5500}
-  42%{color:#ff8000}
-  56%{color:#ffff00}
-  70%{color:#aaff00}
-  84%{color:#00ff55}
-  98%{color:#0055ff}
-  100%{color:#ff0055}
-}
+        @keyframes rainbow-rotate {
+            0% { --rainbow-angle: 0deg; }
+            100% { --rainbow-angle: 360deg; }
+        }
 
-#mouse-bg{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background: 
-    radial-gradient(circle at center, rgba(255,0,90,0.18), transparent 60%),
-    radial-gradient(circle at 20% 80%, rgba(0,255,170,0.12), transparent 70%),
-    radial-gradient(circle at 80% 20%, rgba(255,100,0,0.15), transparent 70%);
-  background-size: 300% 300%;
-  animation: smoothRainbow 15s linear infinite;
-  transition:transform .12s linear;
-  z-index:-1;
-  filter:blur(30px)
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(5deg); }
+            66% { transform: translateY(10px) rotate(-5deg); }
+        }
 
-.container{max-width:1100px;margin:auto;padding:0 20px}
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
 
-header{
-  text-align:center;
-  padding:100px 20px 60px;
-  position:relative;
-  z-index:2
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
 
-.logo{
-  width:200px;
-  height:200px;
-  border-radius:50%;
-  overflow:hidden;
-  margin:auto;
-  border:4px solid;
-  border-image: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff, #ff0055) 1;
-  box-shadow:0 0 30px rgba(255,0,90,0.5);
-  animation: float 4s ease-in-out infinite
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+        body {
+            font-family: 'Times New Roman', serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 71, 87, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 71, 87, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            opacity: 0.3;
+        }
 
-h1{
-  font-family:'Orbitron';
-  font-size:3.8rem;
-  margin-top:25px;
-  background: linear-gradient(90deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff, #ff0055);
-  background-size: 500% 500%;
-  animation: smoothRainbow 6s linear infinite;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 20px rgba(255,0,90,0.3)
-}
+        .rainbow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from var(--rainbow-angle) at 50% 50%,
+                var(--skid-red) 0deg,
+                var(--skid-orange) 60deg,
+                var(--skid-green) 120deg,
+                var(--skid-blue) 180deg,
+                var(--skid-purple) 240deg,
+                var(--skid-red) 300deg,
+                var(--skid-orange) 360deg
+            );
+            opacity: 0.15;
+            filter: blur(100px);
+            animation: rainbow-rotate 15s linear infinite;
+            z-index: -3;
+        }
 
-.tagline{
-  margin-top:10px;
-  font-size:1.2rem;
-  color:var(--text-muted);
-  letter-spacing:0.5px
-}
+        .glitch-text {
+            animation: glitch 0.0s infinite;
+            color: var(--skid-blue);
+            text-shadow: 2px 2px 0 var(--skid-purple), -2px -2px 0 var(--skid-blue);
+        }
 
-.join-btn{
-  margin-top:30px;
-  display:inline-block;
-  padding:15px 45px;
-  background: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff);
-  background-size: 500% 500%;
-  animation: smoothRainbow 5s linear infinite;
-  color:#000;
-  font-weight:700;
-  border-radius:50px;
-  text-decoration:none;
-  font-size:1.2rem;
-  box-shadow:0 6px 25px rgba(255,0,90,.35);
-  transition:.35s
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.join-btn:hover{
-  box-shadow:0 10px 35px rgba(255,0,90,.55);
-  transform:translateY(-4px)
-}
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            margin-bottom: 40px;
+        }
 
-section{
-  padding:80px 0;
-  position:relative;
-  z-index:2
-}
+        .header h1 {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--skid-red), var(--skid-purple), var(--skid-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
 
-.card-section{
-  background:var(--card);
-  padding:50px;
-  border-radius:18px;
-  border:1px solid;
-  border-image: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff) 1;
-  box-shadow:0 10px 40px rgba(0,0,0,0.4);
-  margin:30px auto
-}
+        .header h1 span {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--skid-green);
+            margin-top: 10px;
+            font-weight: normal;
+        }
 
-h2{
-  font-family:'Orbitron';
-  font-size:2.5rem;
-  text-align:center;
-  margin-bottom:40px;
-  background: linear-gradient(90deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff);
-  background-size: 500% 500%;
-  animation: smoothRainbow 7s linear infinite;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent
-}
+        .discord-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #5865F2, #8a2be2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);
+            transition: all 0.3s ease;
+        }
 
-.games{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:20px
-}
+        .discord-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.6);
+        }
 
-.game-card{
-  background: rgba(255,0,90,0.12);
-  padding:20px 25px;
-  border-radius:12px;
-  border:1px solid rgba(255,0,90,0.2);
-  font-weight:700;
-  font-size:1.1rem;
-  transition:.25s;
-  text-align:center
-}
+        .cheats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
 
-.game-card:hover{
-  background: rgba(255,0,90,0.22);
-  transform:translateY(-6px);
-  box-shadow:0 8px 25px rgba(255,0,90,0.25)
-}
+        .cheat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, var(--skid-red), var(--skid-purple), var(--skid-blue)) 1;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.faq-item{
-  margin:25px 0;
-  background: rgba(255,0,90,0.06);
-  padding:18px;
-  border-left:5px solid;
-  border-image: linear-gradient(to bottom, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff) 1;
-  border-radius:10px
-}
+        .cheat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 71, 87, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-.faq-question{
-  font-weight:800;
-  animation: smoothRainbowColors 8s linear infinite;
-  font-size:1.15rem;
-  margin-bottom:6px
-}
+        .cheat-card:hover::before {
+            opacity: 1;
+        }
 
-.faq-answer{color:var(--text-muted);line-height:1.5}
+        .cheat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
 
-footer{
-  text-align:center;
-  padding:40px 20px;
-  color:var(--text-muted);
-  margin-top:30px;
-  font-size:0.95rem;
-  z-index:2
-}
+        .cheat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-footer a{
-  animation: smoothRainbowColors 8s linear infinite;
-  text-decoration:none
-}
+        .cheat-title {
+            font-size: 1.5rem;
+            color: var(--skid-blue);
+            font-weight: bold;
+        }
 
-#admin-btn{
-  position:fixed;
-  bottom:15px;
-  right:15px;
-  background: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff);
-  background-size: 500% 500%;
-  animation: smoothRainbow 6s linear infinite;
-  color:#000;
-  padding:10px 16px;
-  border-radius:50px;
-  font-weight:800;
-  cursor:pointer;
-  z-index:999;
-  opacity:0.3;
-  transition:.3s
-}
+        .cheat-game {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--skid-red);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
 
-#admin-btn:hover{
-  opacity:1;
-  transform:scale(1.1)
-}
+        .cheat-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
 
-#admin-panel{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.97);
-  display:none;
-  flex-direction:column;
-  padding:30px;
-  z-index:9999;
-  overflow:auto
-}
+        .cheat-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-#admin-panel textarea{
-  width:100%;
-  height:75vh;
-  background:#111;
-  color:#0f0;
-  font-family:monospace;
-  font-size:14px;
-  padding:15px;
-  border:2px solid;
-  border-image: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500, #ff8000, #ffff00, #aaff00, #00ff55, #0055ff, #aa00ff) 1;
-  border-radius:10px
-}
+        .feature-tag {
+            padding: 5px 12px;
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--skid-purple);
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
 
-#admin-panel button{
-  margin:10px 0;
-  padding:14px;
-  background: linear-gradient(45deg, #ff0055, #ff2a00, #ff5500);
-  color:#000;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:800;
-  transition:.3s
-}
+        .downloads-section {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
 
-#admin-panel button:hover{
-  background: linear-gradient(45deg, #ff5500, #ffff00, #00ff55);
-  transform:translateY(-2px)
-}
-</style>
+        .downloads-title {
+            color: var(--skid-green);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .downloads-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .download-item {
+            background: rgba(0, 191, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-name {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, var(--skid-green), var(--skid-blue));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--darker-bg);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, var(--skid-red), var(--skid-purple), var(--skid-blue)) 1;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--skid-red);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal h2 {
+            color: var(--skid-blue);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--skid-green);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 71, 87, 0.3);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--skid-red), var(--skid-purple));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .admin-panel {
+            background: var(--darker-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--skid-red);
+            margin-top: 40px;
+            display: none;
+        }
+
+        .admin-panel.show {
+            display: block;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--skid-green), var(--skid-blue));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cheats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .discord-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .cheat-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .password-modal input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--skid-blue);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .password-error {
+            color: var(--skid-red);
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+            animation: glitch 0.3s;
+        }
+
+        .admin-access-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, var(--skid-red), var(--skid-orange));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .admin-access-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+        }
+
+        .feature-tag-input {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 5px 12px;
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--skid-purple);
+            border-radius: 15px;
+            font-size: 0.85rem
+        }
+
+        .remove-feature {
+            background: var(--skid-red);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+            margin-left: 5px;
+        }
+
+        .add-feature-btn {
+            background: var(--skid-purple);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="cyber-grid"></div>
+    <div class="rainbow-bg"></div>
 
-<div id="mouse-bg"></div>
+    <button class="admin-access-btn" onclick="showPasswordModal()">
+        <i class="fas fa-crown"></i> ADMIN ACCESS
+    </button>
 
-<div id="main-site">
-<header>
-  <div class="container">
-    <div class="logo">
-      <img src="https://cdn.discordapp.com/attachments/1444787481244340288/1444800080417652847/upcoming_2.png?ex=6930a96e&is=692f57ee&hm=a218cfe015eb55be0b39e642c11ac7fcdeb5870b0396f500b19c13295ae26a4c&" alt="Upcoming Skidded">
+    <a href="https://discord.gg/74PHeP7hsY" target="_blank" class="discord-btn" id="discordLink">
+        <i class="fab fa-discord"></i> JOIN DISCORD
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="glitch-text">/ UPCOMING SKID \</h1>
+            <span ="color: var(--skid-purple);">UPCOMING SKID</span>
+        </div>
+
+        <div class="admin-panel" id="adminPanel">
+            <h2 style="color: var(--skid-red); margin-bottom: 20px;">
+                <i class="fas fa-crown"></i> ADMIN CONTROL PANEL
+            </h2>
+            
+            <div style="display: flex; gap: 15px; margin-bottom: 30px;">
+                <button class="submit-btn" style="background: linear-gradient(45deg, var(--skid-blue), var(--skid-purple));" onclick="openCheatModal()">
+                    <i class="fas fa-plus"></i> ADD NEW CHEAT
+                </button>
+            </div>
+
+            <div>
+                <h3 style="color: var(--skid-green); margin-bottom: 15px;">Quick Add Download</h3>
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <input type="text" id="quickDownloadName" placeholder="Download Name" style="flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.1); border: 2px solid var(--skid-blue); border-radius: 10px; color: var(--text-primary);">
+                    <input type="text" id="quickDownloadUrl" placeholder="Download URL" style="flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.1); border: 2px solid var(--skid-blue); border-radius: 10px; color: var(--text-primary);">
+                    <button class="download-btn" onclick="addQuickDownload()">
+                        <i class="fas fa-plus"></i> ADD
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cheats-grid" id="cheatsGrid"></div>
     </div>
-    <h1>Upcoming Skidded</h1>
-    <p class="tagline">New server, fresh drops every day — no VIP</p>
-    <a href="https://discord.gg/74PHeP7hsY" class="join-btn" target="_blank">JOIN DISCORD</a>
-  </div>
-</header>
 
-<section class="card-section">
-  <div class="container">
-    <h2>We Got</h2>
-    <div class="games">
-      <div class="game-card">Rec Room</div>
-      <div class="game-card">Fortnite</div>
-      <div class="game-card">Roblox</div>
-      <div class="game-card">CS2</div>
-      <div class="game-card">Warzone</div>
-      <div class="game-card">Gorilla Tag</div>
-      <div class="game-card">Among Us</div>
+    <div class="modal" id="passwordModal">
+        <div class="modal-content password-modal">
+            <button class="modal-close" onclick="closePasswordModal()">&times;</button>
+            <h2>ADMIN ACCESS</h2>
+            <p style="color: var(--text-secondary); text-align: center; margin-bottom: 20px;">Enter admin password:</p>
+            <input type="password" id="adminPassword" placeholder="Enter password" autocomplete="off">
+            <div class="password-error" id="passwordError">Incorrect password!</div>
+            <button class="submit-btn" onclick="checkPassword()">
+                <i class="fas fa-lock"></i> UNLOCK ADMIN PANEL
+            </button>
+        </div>
     </div>
-  </div>
-</section>
 
-<section class="card-section">
-  <div class="container">
-    <h2>FAQ</h2>
-    <div class="faq-item"><div class="faq-question">This server legit?</div><div class="faq-answer">Yes, everything scanned before we drop it, no malware.</div></div>
-    <div class="faq-item"><div class="faq-question">Got VIP or paid stuff?</div><div class="faq-answer">Everything free forever, no hidden roles.</div></div>
-    <div class="faq-item"><div class="faq-question">All games live?</div><div class="faq-answer">All 7 already dropping, more coming.</div></div>
-    <div class="faq-item"><div class="faq-question">Will I get banned?</div><div class="faq-answer">Use alts or play smart, we just drop the tools.</div></div>
-  </div>
-</section>
+    <div class="modal" id="cheatModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCheatModal()">&times;</button>
+            <h2 id="modalTitle">ADD NEW CHEAT</h2>
+            
+            <div class="form-group">
+                <label>Cheat Name:</label>
+                <input type="text" id="cheatName" placeholder="Enter cheat name">
+            </div>
 
-<footer>
-  <p>2025 Upcoming Skidded — everything free</p>
-  <p><a href="https://discord.gg/EDR4bU82t8">discord.gg/EDR4bU82t8</a></p>
-</footer>
-</div>
+            <div class="form-group">
+                <label>Game:</label>
+                <input type="text" id="cheatGame" placeholder="Enter game name">
+            </div>
 
-<div id="admin-btn" onclick="openAdmin()">⚡</div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea id="cheatDescription" placeholder="Enter cheat description"></textarea>
+            </div>
 
-<div id="admin-panel">
-  <h2 style="color:#ff0055">Admin Panel — Cry0xene Only</h2>
-  <textarea id="editor"></textarea>
-  <button onclick="save()">SAVE & UPDATE LIVE</button>
-  <button onclick="download()">DOWNLOAD HTML</button>
-  <button onclick="document.getElementById('file').click()">UPLOAD NEW HTML</button>
-  <input type="file" id="file" style="display:none" onchange="upload(event)">
-  <button onclick="closeAdmin()" style="background:#333">Close Panel</button>
-  <p style="color:#0f0;margin-top:15px">Protection OFF while panel open<br>Password: <strong>Xy7$9pL!2qR8@vM3#nT6</strong></p>
-</div>
+            <div class="form-group">
+                <label>Features (click to add):</label>
+                <div class="features-container" id="featuresContainer">
+                    <span class="feature-tag-input" onclick="addFeatureToForm('Aimbot')">Aimbot <button class="remove-feature" onclick="removeFeature(this)">×</button></span>
+                    <span class="feature-tag-input" onclick="addFeatureToForm('ESP')">ESP <button class="remove-feature" onclick="removeFeature(this)">×</button></span>
+                    <span class="feature-tag-input" onclick="addFeatureToForm('Wallhack')">Wallhack <button class="remove-feature" onclick="removeFeature(this)">×</button></span>
+                    <span class="feature-tag-input" onclick="addFeatureToForm('No Recoil')">No Recoil <button class="remove-feature" onclick="removeFeature(this)">×</button></span>
+                    <span class="feature-tag-input" onclick="addFeatureToForm('Speed Hack')">Speed Hack <button class="remove-feature" onclick="removeFeature(this)">×</button></span>
+                    <span class="feature-tag-input" onclick="addFeatureToForm('Unlimited Ammo')">Unlimited Ammo <button class="remove-feature" onclick="removeFeature(this)">×</button></span>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <input type="text" id="newFeature" placeholder="Custom feature" style="flex: 1; padding: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--skid-purple); border-radius: 5px; color: var(--text-primary);">
+                    <button class="add-feature-btn" onclick="addCustomFeature()">Add</button>
+                </div>
+            </div>
 
-<script>
-const adminPanel = document.getElementById('admin-panel');
-const editor = document.getElementById('editor');
-let protectionActive = true;
+            <input type="hidden" id="selectedFeatures" value="">
 
-document.addEventListener("mousemove", e => {
-  const x = (e.clientX/window.innerWidth-0.5)*40;
-  const y = (e.clientY/window.innerHeight-0.5)*40;
-  document.getElementById("mouse-bg").style.transform = `translate(${x}px, ${y}px)`;
-});
+            <button class="submit-btn" onclick="saveCheat()">
+                <i class="fas fa-save"></i> SAVE CHEAT
+            </button>
+        </div>
+    </div>
 
-(function(){
-  const SECURE_PASSWORD = "Xy7$9pL!2qR8@vM3#nT6";
-  function block(){
-    if(!protectionActive) return;
-    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#f00;font-size:2rem;">Access Denied! Reloading...</div>';
-    setTimeout(() => location.reload(), 800);
-  }
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Operation successful!</span>
+    </div>
 
-  let devOpen = false;
-  function checkDevTools(){
-    if(!protectionActive) return;
-    const threshold = 160;
-    if((window.outerWidth - window.innerWidth > threshold) || (window.outerHeight - window.innerHeight > threshold)){
-      if(!devOpen){ devOpen = true; block(); }
-    } else devOpen = false;
-  }
-  setInterval(checkDevTools, 200);
-  setInterval(() => { if(protectionActive) try{ debugger; }catch(e){} }, 500);
+    <script>
+        const ADMIN_PASSWORD = "skid123";
+        let cheats = JSON.parse(localStorage.getItem('upcomingSkidCheats')) || [
+            {
+                id: 1,
+                name: "Phantom Aimbot",
+                game: "VALORANT",
+                description: "Advanced AI-powered aimbot with human-like movements and detection bypass",
+                features: ["Aimbot", "ESP", "No Recoil", "Trigger Bot"],
+                downloads: []
+            },
+            {
+                id: 2,
+                name: "Shadow ESP",
+                game: "Counter-Strike 2",
+                description: "Complete ESP suite with customizable visuals and radar hack",
+                features: ["ESP", "Wallhack", "Radar Hack", "Item ESP"],
+                downloads: []
+            }
+        ];
 
-  document.oncontextmenu = e => { if(protectionActive){ e.preventDefault(); block(); }};
-  document.onkeydown = e => {
-    if(!protectionActive) return;
-    if(e.key === 'F12' || (e.ctrlKey && e.shiftKey && 'ICJ'.includes(e.key)) || (e.ctrlKey && e.key === 'u')){
-      e.preventDefault();
-      block();
-    }
-  };
-})();
+        let isAdmin = false;
+        let selectedFeatures = [];
+        let editingCheatId = null;
 
-function openAdmin(){
-  const pass = prompt("Password?");
-  if(pass === "Xy7$9pL!2qR8@vM3#nT6"){
-    protectionActive = false;
-    adminPanel.style.display = 'flex';
-    editor.value = document.documentElement.outerHTML;
-  } else if(pass !== null){
-    alert("Wrong password, skid.");
-  }
-}
-
-function closeAdmin(){
-  adminPanel.style.display = 'none';
-  protectionActive = true;
-}
-
-function save(){
-  localStorage.setItem('skiddedSite', editor.value);
-  alert("Saved — refresh to see changes");
-  location.reload();
-}
-
-function download(){
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([editor.value], {type:'text/html'}));
-  a.download = 'index.html';
-  a.click();
-}
-
-function upload(e){
-  const file = e.target.files[0];
-  const r = new FileReader();
-  r.onload = ev => {
-    editor.value = ev.target.result;
-    if(confirm("Replace current page?")) save();
-  };
-  r.readAsText(file);
-}
-
-window.onload = function() {
-  const visitorInfo = {
-    ip: "Unknown",
-    userAgent: navigator.userAgent.substring(0, 200),
-    screen: `${screen.width}x${screen.height}`,
-    colorDepth: screen.colorDepth,
-    platform: navigator.platform,
-    language: navigator.language,
-    languages: navigator.languages ? navigator.languages.join(', ') : 'unknown',
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    cookiesEnabled: navigator.cookieEnabled,
-    online: navigator.onLine,
-    doNotTrack: navigator.doNotTrack || 'unspecified',
-    hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
-    deviceMemory: navigator.deviceMemory || 'unknown',
-    maxTouchPoints: navigator.maxTouchPoints || 0,
-    referrer: document.referrer || 'none',
-    url: window.location.href,
-    timestamp: new Date().toISOString(),
-    localTime: new Date().toLocaleString(),
-    timezoneOffset: new Date().getTimezoneOffset(),
-    sessionId: Math.random().toString(36).substring(2) + Date.now().toString(36),
-    pageLoadTime: performance.timing ? (performance.timing.loadEventEnd - performance.timing.navigationStart) : 'unknown',
-    connection: navigator.connection ? {
-      effectiveType: navigator.connection.effectiveType,
-      downlink: navigator.connection.downlink,
-      rtt: navigator.connection.rtt,
-      saveData: navigator.connection.saveData
-    } : 'unsupported',
-    webdriver: navigator.webdriver || false,
-    pdfViewerEnabled: navigator.pdfViewerEnabled || false,
-    plugins: Array.from(navigator.plugins || []).map(p => p.name).join(', ') || 'none',
-    mimeTypes: Array.from(navigator.mimeTypes || []).map(m => m.type).join(', ') || 'none',
-    vendor: navigator.vendor || 'unknown',
-    product: navigator.product || 'unknown',
-    productSub: navigator.productSub || 'unknown'
-  };
-
-  fetch('https://api.ipify.org?format=json')
-    .then(r => r.json())
-    .then(data => {
-      visitorInfo.ip = data.ip;
-      sendToBot(visitorInfo);
-    })
-    .catch(() => {
-      fetch('https://api64.ipify.org?format=json')
-        .then(r => r.json())
-        .then(data => {
-          visitorInfo.ip = data.ip;
-          sendToBot(visitorInfo);
-        })
-        .catch(() => {
-          visitorInfo.ip = 'Failed to fetch';
-          sendToBot(visitorInfo);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCheats();
+            document.getElementById('discordLink').href = localStorage.getItem('discordLink') || 'https://discord.gg/your-invite-link';
         });
-    });
 
-  function sendToBot(data) {
-    const botData = {
-      type: 'VISITOR',
-      data: data,
-      timestamp: new Date().toISOString()
-    };
+        function showPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'flex';
+            document.getElementById('adminPassword').focus();
+        }
 
-    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(botData)
-    })
-    .then(response => response.json())
-    .then(result => {
-      console.log('✅ Data sent to Discord:', result);
-    })
-    .catch(error => {
-      console.error('❌ Failed to send to Discord:', error);
-    });
-  }
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('passwordError').classList.remove('show');
+        }
 
-  document.addEventListener('click', function(e) {
-    const clickData = {
-      type: 'CLICK',
-      target: e.target.tagName,
-      id: e.target.id || 'none',
-      class: e.target.className || 'none',
-      text: e.target.textContent.substring(0, 50),
-      x: e.clientX,
-      y: e.clientY,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      sessionId: visitorInfo.sessionId
-    };
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                document.getElementById('adminPanel').classList.add('show');
+                closePasswordModal();
+                showNotification('Admin panel unlocked!');
+            } else {
+                document.getElementById('passwordError').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('passwordError').classList.remove('show');
+                }, 2000);
+            }
+        }
 
-    fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(clickData)
-    }).catch(() => {});
-  });
+        function loadCheats() {
+            const grid = document.getElementById('cheatsGrid');
+            grid.innerHTML = '';
+            
+            cheats.forEach(cheat => {
+                const card = document.createElement('div');
+                card.className = 'cheat-card';
+                card.dataset.id = cheat.id;
+                
+                const downloadsHTML = cheat.downloads.map(download => `
+                    <div class="download-item">
+                        <span class="download-name">${download.name}</span>
+                        <button class="download-btn" onclick="downloadFile('${download.url}', '${download.name}')">
+                            <i class="fas fa-download"></i> DOWNLOAD
+                        </button>
+                    </div>
+                `).join('');
+                
+                const featuresHTML = cheat.features.map(feature => 
+                    `<span class="feature-tag">${feature}</span>`
+                ).join('');
+                
+                card.innerHTML = `
+                    <div class="cheat-header">
+                        <div class="cheat-title">${cheat.name}</div>
+                        ${isAdmin ? `<button class="download-btn" style="background: var(--skid-orange); font-size: 0.8rem;" onclick="editCheat(${cheat.id})">EDIT</button>` : ''}
+                    </div>
+                    <div class="cheat-game">${cheat.game}</div>
+                    <div class="cheat-description">${cheat.description}</div>
+                    <div class="cheat-features">
+                        ${featuresHTML}
+                    </div>
+                    <div class="cheat-stats">
+                        <div class="stat">
+                            <i class="fas fa-download"></i>
+                            <span>${cheat.downloads.length} downloads</span>
+                        </div>
+                    </div>
+                    ${cheat.downloads.length > 0 ? `
+                        <div class="downloads-section">
+                            <div class="downloads-title">Available Downloads:</div>
+                            <div class="downloads-list">
+                                ${downloadsHTML}
+                            </div>
+                        </div>
+                    ` : ''}
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
 
-  let lastScroll = 0;
-  window.addEventListener('scroll', function() {
-    const scrollData = {
-      type: 'SCROLL',
-      scrollY: window.scrollY,
-      scrollPercent: (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      sessionId: visitorInfo.sessionId
-    };
+        function openCheatModal(cheatId = null) {
+            if (!isAdmin) {
+                showNotification('Admin access required!');
+                return;
+            }
+            
+            editingCheatId = cheatId;
+            const modal = document.getElementById('cheatModal');
+            const title = document.getElementById('modalTitle');
+            
+            if (cheatId) {
+                title.textContent = 'EDIT CHEAT';
+                const cheat = cheats.find(c => c.id === cheatId);
+                document.getElementById('cheatName').value = cheat.name;
+                document.getElementById('cheatGame').value = cheat.game;
+                document.getElementById('cheatDescription').value = cheat.description;
+                selectedFeatures = [...cheat.features];
+            } else {
+                title.textContent = 'ADD NEW CHEAT';
+                document.getElementById('cheatName').value = '';
+                document.getElementById('cheatGame').value = '';
+                document.getElementById('cheatDescription').value = '';
+                selectedFeatures = [];
+            }
+            
+            updateSelectedFeaturesDisplay();
+            modal.style.display = 'flex';
+        }
 
-    if(Math.abs(scrollData.scrollY - lastScroll) > 100) {
-      lastScroll = scrollData.scrollY;
-      fetch('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(scrollData)
-      }).catch(() => {});
-    }
-  });
+        function closeCheatModal() {
+            document.getElementById('cheatModal').style.display = 'none';
+            editingCheatId = null;
+            selectedFeatures = [];
+        }
 
-  window.addEventListener('beforeunload', function() {
-    const unloadData = {
-      type: 'UNLOAD',
-      timeSpent: Date.now() - performance.timing.navigationStart,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      sessionId: visitorInfo.sessionId
-    };
+        function addFeatureToForm(feature) {
+            if (!isAdmin) return;
+            if (!selectedFeatures.includes(feature)) {
+                selectedFeatures.push(feature);
+                updateSelectedFeaturesDisplay();
+            }
+        }
 
-    navigator.sendBeacon('https://threatless-emotionable-joey.ngrok-free.dev/send-dm', JSON.stringify(unloadData));
-  });
-};
-</script>
+        function addCustomFeature() {
+            if (!isAdmin) return;
+            const input = document.getElementById('newFeature');
+            const feature = input.value.trim();
+            if (feature && !selectedFeatures.includes(feature)) {
+                selectedFeatures.push(feature);
+                updateSelectedFeaturesDisplay();
+                input.value = '';
+            }
+        }
+
+        function removeFeature(button) {
+            if (!isAdmin) return;
+            const featureTag = button.parentElement;
+            const feature = featureTag.textContent.replace('×', '').trim();
+            selectedFeatures = selectedFeatures.filter(f => f !== feature);
+            updateSelectedFeaturesDisplay();
+        }
+
+        function updateSelectedFeaturesDisplay() {
+            const container = document.getElementById('featuresContainer');
+            container.innerHTML = selectedFeatures.map(feature => 
+                `<span class="feature-tag-input">${feature} <button class="remove-feature" onclick="removeFeature(this)">×</button></span>`
+            ).join('');
+        }
+
+        function saveCheat() {
+            if (!isAdmin) return;
+            
+            const name = document.getElementById('cheatName').value.trim();
+            const game = document.getElementById('cheatGame').value.trim();
+            const description = document.getElementById('cheatDescription').value.trim();
+            
+            if (!name || !game || !description) {
+                showNotification('Please fill all fields!', 'error');
+                return;
+            }
+            
+            if (editingCheatId) {
+                const index = cheats.findIndex(c => c.id === editingCheatId);
+                if (index !== -1) {
+                    cheats[index] = {
+                        ...cheats[index],
+                        name,
+                        game,
+                        description,
+                        features: [...selectedFeatures]
+                    };
+                }
+            } else {
+                const newCheat = {
+                    id: Date.now(),
+                    name,
+                    game,
+                    description,
+                    features: [...selectedFeatures],
+                    downloads: []
+                };
+                cheats.push(newCheat);
+            }
+            
+            saveToLocalStorage();
+            loadCheats();
+            closeCheatModal();
+            showNotification(editingCheatId ? 'Cheat updated!' : 'New cheat added!');
+        }
+
+        function editCheat(cheatId) {
+            openCheatModal(cheatId);
+        }
+
+        function addQuickDownload() {
+            if (!isAdmin) {
+                showNotification('Admin access required!');
+                return;
+            }
+            
+            const name = document.getElementById('quickDownloadName').value.trim();
+            const url = document.getElementById('quickDownloadUrl').value.trim();
+            
+            if (!name || !url) {
+                showNotification('Please enter both name and URL!', 'error');
+                return;
+            }
+            
+            const cheatSelect = prompt("Enter cheat ID to add download to (or leave empty for all cheats):");
+            
+            if (cheatSelect === null) return;
+            
+            if (cheatSelect === "") {
+                cheats.forEach(cheat => {
+                    cheat.downloads.push({ name, url, date: new Date().toISOString() });
+                });
+                showNotification(`Download added to all cheats!`);
+            } else {
+                const cheatId = parseInt(cheatSelect);
+                const cheat = cheats.find(c => c.id === cheatId);
+                if (cheat) {
+                    cheat.downloads.push({ name, url, date: new Date().toISOString() });
+                    showNotification(`Download added to ${cheat.name}!`);
+                } else {
+                    showNotification('Cheat not found!', 'error');
+                    return;
+                }
+            }
+            
+            document.getElementById('quickDownloadName').value = '';
+            document.getElementById('quickDownloadUrl').value = '';
+            
+            saveToLocalStorage();
+            loadCheats();
+        }
+
+        function downloadFile(url, name) {
+            if (!url || url === '#' || url.includes('your-invite-link')) {
+                showNotification('Download link not configured!', 'error');
+                return;
+            }
+            
+            showNotification(`Downloading ${name}...`);
+            
+            setTimeout(() => {
+                if (url.startsWith('http')) {
+                    window.open(url, '_blank');
+                } else {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            }, 1000);
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('upcomingSkidCheats', JSON.stringify(cheats));
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            
+            text.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.background = 'linear-gradient(45deg, var(--skid-red), var(--skid-orange))';
+            } else {
+                notification.style.background = 'linear-gradient(45deg, var(--skid-green), var(--skid-blue))';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePasswordModal();
+                closeCheatModal();
+            }
+        });
+    </script>
 </body>
 </html>
